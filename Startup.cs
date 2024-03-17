@@ -1,18 +1,18 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Capstone.DAO;
+using Capstone.Security;
+using Capstone.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Text;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Capstone.DAO;
-using Capstone.Security;
 using Microsoft.OpenApi.Models;
-using Capstone.Services;
-using RecordCollection.Services;
 using RecordCollection.DAO;
+using RecordCollection.Services;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace Capstone
 {
@@ -39,8 +39,9 @@ namespace Capstone
                     });
             });
 
-/*            string connectionString = Configuration.GetConnectionString("Project");
-*/            string connectionString = "Server=tcp:jakesrecordcollection-dbserver.database.windows.net,1433;Initial Catalog=jakesrecordcollection-db;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\";";
+            /*            string connectionString = Configuration.GetConnectionString("Project");
+            */
+            string connectionString = "Server=tcp:jakesrecordcollection-dbserver.database.windows.net,1433;Initial Catalog=jakesrecordcollection-db;Persist Security Info=False;User ID=jleya95;Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
 
             // configure jwt authentication
@@ -71,11 +72,12 @@ namespace Capstone
             services.AddTransient<IUserDao>(m => new UserSqlDao(connectionString));
             services.AddTransient<IFileService>(m => new FileService());
             services.AddTransient<IRecordDao>(m => new RecordSqlDao(connectionString));
-            services.AddTransient<IRecordService>(m=> new RecordService());
+            services.AddTransient<IRecordService>(m => new RecordService());
             services.AddTransient<ISingleDao>(m => new SingleSqlDao(connectionString));
 
             // Swagger set up
-            services.AddSwaggerGen(s => {
+            services.AddSwaggerGen(s =>
+            {
                 s.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = Configuration["APIVersion"],
