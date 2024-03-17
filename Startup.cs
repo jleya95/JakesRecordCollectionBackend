@@ -40,7 +40,7 @@ namespace Capstone
             });
 
 /*            string connectionString = Configuration.GetConnectionString("Project");
-*/            string connectionString = "Server=tcp:jakesrecordcollection-dbserver.database.windows.net,1433;Initial Catalog=record_collection;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\";";
+*/            string connectionString = "Server=tcp:jakesrecordcollection-dbserver.database.windows.net,1433;Initial Catalog=jakesrecordcollection-db;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\";";
 
 
             // configure jwt authentication
