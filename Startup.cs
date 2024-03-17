@@ -39,10 +39,10 @@ namespace Capstone
                     });
             });
 
-            /*            string connectionString = Configuration.GetConnectionString("Project");
-            */
-            string connectionString = "Server=tcp:jakesrecordcollection-dbserver.database.windows.net,1433;Initial Catalog=jakesrecordcollection-db;Persist Security Info=False;User ID=jleya95;Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            string connectionString = Configuration.GetConnectionString("Project");
 
+/*            string connectionString = "Server=tcp:jakesrecordcollection-dbserver.database.windows.net,1433;Initial Catalog=jakesrecordcollection-db;Persist Security Info=False;User ID=jleya95;Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+*/
 
             // configure jwt authentication
             var key = Encoding.ASCII.GetBytes(Configuration["JwtSecret"]);
