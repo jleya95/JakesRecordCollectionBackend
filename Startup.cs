@@ -39,11 +39,11 @@ namespace Capstone
                     });
             });
 
-            /*            string connectionString = Configuration.GetConnectionString("Project");
-            */
-            string myPassword = "Pippy2005!";
-            string connectionString = $"Server=tcp:jakesrecordcollection-dbserver.database.windows.net,1433;Initial Catalog=jakesrecordcollection-db;Persist Security Info=False;User ID=jleya95;Password={myPassword};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            string connectionString = Configuration.GetConnectionString("Project");
 
+            /*            string myPassword = "Pippy2005!";
+                        string connectionString = $"Server=tcp:jakesrecordcollection-dbserver.database.windows.net,1433;Initial Catalog=jakesrecordcollection-db;Persist Security Info=False;User ID=jleya95;Password={myPassword};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            */
 
             // configure jwt authentication
             var key = Encoding.ASCII.GetBytes(Configuration["JwtSecret"]);
@@ -75,6 +75,7 @@ namespace Capstone
             services.AddTransient<IRecordDao>(m => new RecordSqlDao(connectionString));
             services.AddTransient<IRecordService>(m => new RecordService());
             services.AddTransient<ISingleDao>(m => new SingleSqlDao(connectionString));
+            services.AddTransient<IDataForScript>(m => new DataForScriptSqlDao(connectionString));
 
             // Swagger set up
             services.AddSwaggerGen(s =>
