@@ -3,5 +3,6 @@
     public interface IDataForScript
     {
         string GetRecordsValuesForSqlScript();
+        string GetSinglesValuesForScript();
     }
 }

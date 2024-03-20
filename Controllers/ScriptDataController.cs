@@ -12,10 +12,18 @@ namespace RecordCollection.Controllers
             this.dataForScriptDao = dataForScriptDao;
         }
 
-        [HttpGet]
+        [HttpGet("records")]
         public ActionResult<string> GetInsertValuesStringForScript()
         {
             string insertValues = dataForScriptDao.GetRecordsValuesForSqlScript();
+
+            return insertValues;
+        }
+
+        [HttpGet("singles")]
+        public ActionResult<string> GetSinglesInsertValueStringForScript()
+        {
+            string insertValues = dataForScriptDao.GetSinglesValuesForScript();
 
             return insertValues;
         }

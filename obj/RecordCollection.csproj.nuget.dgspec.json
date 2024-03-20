@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jleya\\Documents\\Repos\\JakesRecordCollectionBackend\\RecordCollection.csproj": {}
+    "C:\\Users\\jleya\\Documents\\Repos\\Backends\\JakesRecordCollectionBackend\\RecordCollection.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jleya\\Documents\\Repos\\JakesRecordCollectionBackend\\RecordCollection.csproj": {
+    "C:\\Users\\jleya\\Documents\\Repos\\Backends\\JakesRecordCollectionBackend\\RecordCollection.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jleya\\Documents\\Repos\\JakesRecordCollectionBackend\\RecordCollection.csproj",
+        "projectUniqueName": "C:\\Users\\jleya\\Documents\\Repos\\Backends\\JakesRecordCollectionBackend\\RecordCollection.csproj",
         "projectName": "RecordCollection",
-        "projectPath": "C:\\Users\\jleya\\Documents\\Repos\\JakesRecordCollectionBackend\\RecordCollection.csproj",
+        "projectPath": "C:\\Users\\jleya\\Documents\\Repos\\Backends\\JakesRecordCollectionBackend\\RecordCollection.csproj",
         "packagesPath": "C:\\Users\\jleya\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jleya\\Documents\\Repos\\JakesRecordCollectionBackend\\obj\\",
+        "outputPath": "C:\\Users\\jleya\\Documents\\Repos\\Backends\\JakesRecordCollectionBackend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jleya\\AppData\\Roaming\\NuGet\\NuGet.Config",
