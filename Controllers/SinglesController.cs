@@ -50,7 +50,7 @@ namespace RecordCollection.Controllers
             return randomSingle;
         }
 
-        [HttpPost("add")]
+/*        [HttpPost("add")]
         public ActionResult<SingleEP> AddSingle(string fileAs, string artist, string title, string releaseYear, string recordLabel, string issueYear, string serialNumber, string pressing, string color, string notes)
         {
             SingleEP singleToAdd = MapFormToSingle(fileAs, artist, title, releaseYear, recordLabel, issueYear, serialNumber, pressing, color, notes);
@@ -71,7 +71,28 @@ namespace RecordCollection.Controllers
 
             return BadRequest("Single already exists in database");
         }
+*/
+        [HttpPost("add1")]
+        public ActionResult<SingleEP> AddSingle1(string fileAs, string artist, string title, string releaseYear, string recordLabel, string issueYear, string serialNumber, string pressing, string color, string notes)
+        {
+            SingleEP singleToAdd = MapFormToSingle(fileAs, artist, title, releaseYear, recordLabel, issueYear, serialNumber, pressing, color, notes);
+            bool singleExists = _singleDao.CheckSingleExistence(singleToAdd);
+            bool singleAdded;
 
+            if (!singleExists)
+            {
+                singleAdded = _singleDao.AddSingleToDb(singleToAdd);
+                if (singleAdded)
+                {
+                    return Ok(singleToAdd);
+                } else
+                {
+                    return BadRequest("There was a problem adding single");
+                }
+            }
+
+            return BadRequest("Single already exists in database");
+        }
 
         private SingleEP MapFormToSingle(string fileAs, string artist, string title, string releaseYear, string recordLabel, string issueYear, string serialNumber, string pressing, string color, string notes)
         {
