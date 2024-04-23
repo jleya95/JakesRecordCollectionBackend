@@ -1,5 +1,4 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using RecordCollection.Models;
+﻿using RecordCollection.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -113,29 +112,9 @@ namespace RecordCollection.DAO
                     cmd.Parameters.AddWithValue("@record_label", single.Label);
                     cmd.Parameters.AddWithValue("@issue_year", single.IssueYear);
                     cmd.Parameters.AddWithValue("@serial_number", single.SerialNumber);
-                    if (!single.Pressing.IsNullOrEmpty())
-                    {
-                        cmd.Parameters.AddWithValue("@pressing", single.Pressing);
-                    } else
-                    {
-                        cmd.Parameters.AddWithValue("@pressing", "");
-                    }
-                    if (!single.Color.IsNullOrEmpty())
-                    {
-                        cmd.Parameters.AddWithValue("@color", single.Color);
-                    }
-                    else
-                    {
-                        cmd.Parameters.AddWithValue("@color", "");
-                    }
-                    if (!single.Notes.IsNullOrEmpty())
-                    {
-                        cmd.Parameters.AddWithValue("@notes", single.Notes);
-                    }
-                    else
-                    {
-                        cmd.Parameters.AddWithValue("@notes", "");
-                    }
+                    cmd.Parameters.AddWithValue("@pressing", single.Pressing);
+                    cmd.Parameters.AddWithValue("@color", single.Color);
+                    cmd.Parameters.AddWithValue("@notes", single.Notes);
 
                     singleId = Convert.ToInt32(cmd.ExecuteScalar());
                     return true;

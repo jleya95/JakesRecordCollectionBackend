@@ -72,8 +72,8 @@ namespace RecordCollection.Controllers
                     return BadRequest("Single already exists in database");
                 }
         */
-        [HttpPost("add1")]
-        public ActionResult<SingleEP> AddSingle1(string fileAs, string artist, string title, string releaseYear, string recordLabel, string issueYear, string serialNumber, string pressing, string color, string notes)
+        [HttpPost("add")]
+        public ActionResult<SingleEP> AddSingle(string fileAs, string artist, string title, string releaseYear, string recordLabel, string issueYear, string serialNumber, string pressing, string color, string notes)
         {
             SingleEP singleToAdd = MapFormToSingle(fileAs, artist, title, releaseYear, recordLabel, issueYear, serialNumber, pressing, color, notes);
             bool singleExists = _singleDao.CheckSingleExistence(singleToAdd);
@@ -106,15 +106,50 @@ namespace RecordCollection.Controllers
             {
                 single.ReleaseYear = Convert.ToInt16(releaseYear);
             }
-            single.Label = recordLabel;
+            if (!recordLabel.IsNullOrEmpty())
+            {
+                single.Label = recordLabel;
+            }
+            else
+            {
+                single.Label = "";
+            }
             if (!issueYear.IsNullOrEmpty())
             {
                 single.IssueYear = Convert.ToInt16(issueYear);
             }
-            single.SerialNumber = serialNumber;
-            single.Pressing = pressing;
-            single.Color = color;
-            single.Notes = notes;
+            if (!serialNumber.IsNullOrEmpty())
+            {
+                single.SerialNumber = serialNumber;
+            }
+            else
+            {
+                single.SerialNumber = "";
+            }
+            if (!pressing.IsNullOrEmpty())
+            {
+                single.Pressing = pressing;
+            }
+            else
+            {
+                single.Pressing = "";
+            }
+            if (!color.IsNullOrEmpty())
+            {
+                single.Color = color;
+            }
+            else
+            {
+                single.Color = "";
+            }
+            if (!notes.IsNullOrEmpty())
+            {
+                single.Notes = notes;
+            }
+            else
+            {
+                single.Notes = "";
+            }
 
             return single;
         }
