@@ -1,5 +1,5 @@
-﻿using Capstone.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using RecordCollection.DAO;
 using RecordCollection.Models;
 using System;
@@ -24,13 +24,13 @@ namespace RecordCollection.Controllers
             return singles;
         }
 
-/*        [HttpGet("{artist}/{title}")]
-        public ActionResult<SingleEP> GetSingle(string title, string artist, string serial, string releaseYear, string issueYear)
-        {
-            SingleEP singleEP = _singleDao.GetSingle(title, artist, serial, releaseYear, issueYear);
-            return singleEP;
-        }
-*/
+        /*        [HttpGet("{artist}/{title}")]
+                public ActionResult<SingleEP> GetSingle(string title, string artist, string serial, string releaseYear, string issueYear)
+                {
+                    SingleEP singleEP = _singleDao.GetSingle(title, artist, serial, releaseYear, issueYear);
+                    return singleEP;
+                }
+        */
         [HttpGet("Single")]
         public ActionResult<SingleEP> GetSingle1(string title, string artist, string serial, string releaseYear, string issueYear)
         {
@@ -50,28 +50,28 @@ namespace RecordCollection.Controllers
             return randomSingle;
         }
 
-/*        [HttpPost("add")]
-        public ActionResult<SingleEP> AddSingle(string fileAs, string artist, string title, string releaseYear, string recordLabel, string issueYear, string serialNumber, string pressing, string color, string notes)
-        {
-            SingleEP singleToAdd = MapFormToSingle(fileAs, artist, title, releaseYear, recordLabel, issueYear, serialNumber, pressing, color, notes);
-            bool singleExists = _singleDao.CheckSingleExistence(singleToAdd);
-            bool singleAdded;
+        /*        [HttpPost("add")]
+                public ActionResult<SingleEP> AddSingle(string fileAs, string artist, string title, string releaseYear, string recordLabel, string issueYear, string serialNumber, string pressing, string color, string notes)
+                {
+                    SingleEP singleToAdd = MapFormToSingle(fileAs, artist, title, releaseYear, recordLabel, issueYear, serialNumber, pressing, color, notes);
+                    bool singleExists = _singleDao.CheckSingleExistence(singleToAdd);
+                    bool singleAdded;
 
-            if(!singleExists)
-            {
-                singleAdded = _singleDao.AddSingleToDb(singleToAdd);
-                if(singleAdded)
-                {
-                    return Ok(singleToAdd);
-                } else
-                {
-                    return BadRequest("There was a problem adding single");
+                    if(!singleExists)
+                    {
+                        singleAdded = _singleDao.AddSingleToDb(singleToAdd);
+                        if(singleAdded)
+                        {
+                            return Ok(singleToAdd);
+                        } else
+                        {
+                            return BadRequest("There was a problem adding single");
+                        }
+                    }
+
+                    return BadRequest("Single already exists in database");
                 }
-            }
-
-            return BadRequest("Single already exists in database");
-        }
-*/
+        */
         [HttpPost("add1")]
         public ActionResult<SingleEP> AddSingle1(string fileAs, string artist, string title, string releaseYear, string recordLabel, string issueYear, string serialNumber, string pressing, string color, string notes)
         {
@@ -85,7 +85,8 @@ namespace RecordCollection.Controllers
                 if (singleAdded)
                 {
                     return Ok(singleToAdd);
-                } else
+                }
+                else
                 {
                     return BadRequest("There was a problem adding single");
                 }
@@ -101,9 +102,15 @@ namespace RecordCollection.Controllers
             single.File = fileAs;
             single.Artist = artist;
             single.Title = title;
-            single.ReleaseYear = Convert.ToInt16(releaseYear);
+            if (!releaseYear.IsNullOrEmpty())
+            {
+                single.ReleaseYear = Convert.ToInt16(releaseYear);
+            }
             single.Label = recordLabel;
-            single.IssueYear = Convert.ToInt16(issueYear);
+            if (!issueYear.IsNullOrEmpty())
+            {
+                single.IssueYear = Convert.ToInt16(issueYear);
+            }
             single.SerialNumber = serialNumber;
             single.Pressing = pressing;
             single.Color = color;

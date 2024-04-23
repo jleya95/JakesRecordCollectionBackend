@@ -113,7 +113,13 @@ namespace RecordCollection.DAO
                     cmd.Parameters.AddWithValue("@record_label", single.Label);
                     cmd.Parameters.AddWithValue("@issue_year", single.IssueYear);
                     cmd.Parameters.AddWithValue("@serial_number", single.SerialNumber);
-                    cmd.Parameters.AddWithValue("@pressing", single.Pressing);
+                    if (!single.Pressing.IsNullOrEmpty())
+                    {
+                        cmd.Parameters.AddWithValue("@pressing", single.Pressing);
+                    } else
+                    {
+                        cmd.Parameters.AddWithValue("@pressing", "");
+                    }
                     if (!single.Color.IsNullOrEmpty())
                     {
                         cmd.Parameters.AddWithValue("@color", single.Color);
@@ -125,7 +131,8 @@ namespace RecordCollection.DAO
                     if (!single.Notes.IsNullOrEmpty())
                     {
                         cmd.Parameters.AddWithValue("@notes", single.Notes);
-                    } else
+                    }
+                    else
                     {
                         cmd.Parameters.AddWithValue("@notes", "");
                     }
